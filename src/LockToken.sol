@@ -23,27 +23,13 @@ contract LockToken {
     mapping(address => Lock[]) public userLocks;
 
     ///@notice emitted when Tokens are Locked
-    event tokenLocked(
-        address indexed user,
-        address indexed token,
-        uint256 amount,
-        uint256 duration
-    );
+    event tokenLocked(address indexed user, address indexed token, uint256 amount, uint256 duration);
 
     ///@notice emitted when Tokens are Unlocked
-    event tokenWithdrawn(
-        address indexed user,
-        address indexed token,
-        uint256 amount,
-        uint256 lockId
-    );
+    event tokenWithdrawn(address indexed user, address indexed token, uint256 amount, uint256 lockId);
 
     ///@notice locks token for specific duration (sec)
-    function lockToken(
-        address _token,
-        uint256 _amount,
-        uint256 _duration
-    ) external {
+    function lockToken(address _token, uint256 _amount, uint256 _duration) external {
         if (_amount == 0) {
             revert InsufficientAmount();
         }
@@ -56,22 +42,13 @@ contract LockToken {
         IERC20(_token).transferFrom(msg.sender, address(this), _amount);
 
         //create the lock
-        Lock memory newLock = Lock({
-            token: _token,
-            amount: _amount,
-            unlockTime: block.timestamp + _duration,
-            withdraw: false
-        });
+        Lock memory newLock =
+            Lock({token: _token, amount: _amount, unlockTime: block.timestamp + _duration, withdraw: false});
 
         //feeding newLock to struct array
         userLocks[msg.sender].push(newLock);
         // Updating the current state
-        emit tokenLocked(
-            msg.sender,
-            _token,
-            _amount,
-            block.timestamp + _duration
-        );
+        emit tokenLocked(msg.sender, _token, _amount, block.timestamp + _duration);
     }
     ///@notice withdraw unlocked tokens using token index
 
@@ -96,12 +73,7 @@ contract LockToken {
         IERC20(userLock.token).transfer(msg.sender, userLock.amount);
 
         //udpating withdrawn state~
-        emit tokenWithdrawn(
-            msg.sender,
-            userLock.token,
-            userLock.amount,
-            lockId
-        );
+        emit tokenWithdrawn(msg.sender, userLock.token, userLock.amount, lockId);
     }
 
     //Getter function
