@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "abitype": "^1.0.8",
+    "viem": "^2.31.7"
+  }
+}
