@@ -42,15 +42,6 @@ The **Lock ERC20 Token** smart contract enables users to **lock any ERC20 token*
 
 ---
 
-And here’s **where to insert it in the full README**:
-
-* Just **below** the `📖 Introduction` section
-* Or right after the `📊 How It Works` diagram
-
----
-
----
-
 ### 🚀 Installation & Usage (for End-Users)
 
 #### 1. Clone or Deploy the Contract
