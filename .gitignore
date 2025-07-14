@@ -2,14 +2,15 @@
 cache/
 out/
 
-# Ignores development broadcast logs
-!/broadcast
-/broadcast/*/31337/
-/broadcast/**/dry-run/
+# Ignore all broadcast logs
+broadcast/
 
 # Docs
 docs/
 
 # Dotenv file
 .env
-node_modules
+
+# Node packages (if applicable)
+node_modules/
+
