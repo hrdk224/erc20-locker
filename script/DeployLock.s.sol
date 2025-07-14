@@ -6,17 +6,18 @@ import {console} from "forge-std/console.sol";
 import {LockToken} from "../src/LockToken.sol";
 import {MockERC20} from "../src/MockERC20.sol";
 
-contract DeployLockToken is Script {
-    function setUp() public {}
+contract DeployLock is Script {
+    MockERC20 public usdc;
+    LockToken public lockToken;
 
     function run() public {
         vm.startBroadcast();
 
         uint256 initialSupply = 1_000_000 * 1e18;
 
-        MockERC20 usdc = new MockERC20(initialSupply);
+        usdc = new MockERC20(initialSupply);
 
-        LockToken lockToken = new LockToken();
+        lockToken = new LockToken();
 
         console.log("MockUSDC deployed at:", address(usdc));
         console.log("LockToken deployed at:", address(lockToken));
